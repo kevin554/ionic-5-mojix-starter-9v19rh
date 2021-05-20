@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mojix Music App</ion-title>
+    <div slot="end">
+      <ion-label>Music/Movie</ion-label>
+      <ion-toggle></ion-toggle>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
+  <ion-list *ngFor="let song of songs; let isOdd = odd">
+    <div class="{{isOdd ? 'bg-warning' : 'bg-info'}} mx-3 rounded">
+      <app-song [currentSong]="song"></app-song>
+    </div>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <app-song></app-song>
+</ion-footer>
