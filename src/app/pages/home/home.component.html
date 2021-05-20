@@ -3,7 +3,7 @@
     <ion-title>Mojix Music App</ion-title>
     <div slot="end">
       <ion-label>Music/Movie</ion-label>
-      <ion-toggle></ion-toggle>
+      <ion-toggle (ionChange)="toggleMedia($event)"></ion-toggle>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -16,5 +16,5 @@
   </ion-list>
 </ion-content>
 <ion-footer>
-  <app-song></app-song>
+  <!-- <app-song></app-song> -->
 </ion-footer>

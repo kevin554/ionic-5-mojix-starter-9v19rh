@@ -12,9 +12,9 @@ import { ApiService } from '../../api/api.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnChanges, AfterViewInit {
-
   allTheSongs;
   songs;
+  userWantsMovies = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -30,17 +30,27 @@ export class HomeComponent implements OnChanges, AfterViewInit {
   search(event) {
     let searchTerm = event.srcElement.value;
 
-    let copy = JSON.parse(JSON.stringify(this.songs));
-
-    if (searchTerm == "") {
-      this.songs = this.allTheSongs;
+    if (searchTerm == '') {
+      this.songs = JSON.parse(JSON.stringify(this.allTheSongs));
       return;
     }
 
     this.songs = this.songs.filter(item => {
-    if (item.artistName && searchTerm) {
-      return (item.artistName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-    }
-  });
+      if (item.artistName && searchTerm) {
+        return (
+          item.artistName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+        );
+      }
+    });
+  }
+
+  toggleMedia(event) {
+    this.userWantsMovies = !this.userWantsMovies;
+
+    this.songs = JSON.parse(JSON.stringify(this.allTheSongs));
+    this.songs = this.songs.filter(item => {
+      // console.log(item.kind);
+      return this.userWantsMovies ? item.kind.trim() == 'music-video' : true;
+    });
   }
 }
